@@ -2,17 +2,16 @@
 This functions as a test and development repo for team 253's 2018 offseason code. 
 
 ## Changes from Code2018
-In preparation for the new 2019 WPILib control system, we have moved to using Intellij as an IDE and Gradle for robot code deployment. To get the most out of this code, install [IntelliJ](https://www.jetbrains.com/idea/) on your machine and open `Code2018.ipr`. It should take a moment to import the Gradle project. After it loads, you can use the keyboard shortcut `Alt+1` to get to the project manager.
+In preparation for the new 2019 WPILib control system, we have moved to using Intellij as an IDE and GradleRIO for robot code deployment. 
 
 ## Getting Started
+Once you have a version of the code on your machine (follow the instructions below this section), you can install [IntelliJ](https://www.jetbrains.com/idea/). Open the file named `Code2018.ipr` in IntelliJ. It should take a moment to import the Gradle project. Once it is complete, you can use the keyboard shortcut `Alt+1` to open the project window.
 
 ### Dependencies
-- **Java**
-- **Gradle**
-
-Your machine will need Java (it should already have Java). Install Java [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
-Your machine will also need [Gradle](https://gradle.org/install/). 
-
+- **Java** Your machine will need Java, specifically [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
+- **Gradle** Your machine will also need [Gradle](https://gradle.org/install/). 
+- **Git** While it is not necessary, you can also install a GUI for Git, such as GitKraken. If you wish to to so, you will still need to install Git.
+- **IntelliJ** Other IDEs, such and Eclipse and VS Code will also work, but this code is targeted toward users of [IntelliJ](https://www.jetbrains.com/idea/).
 
 ### Installing and Using Git
 To get started, you'll first have to install Git on your machine. Open [this link](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), navigate to the instruction section for your machine's OS, and follow the instructions there. Restart your machine if you want to be safe.
