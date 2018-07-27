@@ -8,10 +8,10 @@ In preparation for the new 2019 WPILib control system, we have moved to using In
 Once you have a version of the code on your machine (follow the instructions below this section), you can install [IntelliJ](https://www.jetbrains.com/idea/). Open the file named `Code2018.ipr` in IntelliJ. It should take a moment to import the Gradle project. Once it is complete, you can use the keyboard shortcut `Alt+1` to open the project window.
 
 ### Dependencies
-- **Java** Your machine will need Java, specifically [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
-- **Gradle** Your machine will also need [Gradle](https://gradle.org/install/). 
-- **Git** While it is not necessary, you can also install a GUI for Git, such as GitKraken. If you wish to to so, you will still need to install Git.
-- **IntelliJ** Other IDEs, such and Eclipse and VS Code will also work, but this code is targeted toward users of [IntelliJ](https://www.jetbrains.com/idea/).
+- **Java**: Your machine will need Java, specifically [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
+- **Gradle**: Your machine will also need [Gradle](https://gradle.org/install/). 
+- **Git**: While it is not necessary, you can also install a GUI for Git, such as GitKraken. If you wish to to so, you will still need to install Git. Instructions are below.
+- **IntelliJ**: Other IDEs, such and Eclipse and VS Code will also work, but this code is targeted toward users of [IntelliJ](https://www.jetbrains.com/idea/).
 
 ### Installing and Using Git
 To get started, you'll first have to install Git on your machine. Open [this link](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), navigate to the instruction section for your machine's OS, and follow the instructions there. Restart your machine if you want to be safe.
@@ -36,7 +36,7 @@ If it completes with the message `BUILD FAILED in # seconds`, your code does not
 If it completes with the message `BUILD SUCCESSFUL in # seconds`, your code compiles. This means your code does not have any errors. However, code that compiles can still have errors at runtime, so make sure to test all your code.
 
 #### Deploying
-Before deploying, make sure your code builds with the instructionms above.
+Before deploying, make sure your code builds with the instructions above.
 
 To deploy your code, you will need access to the robot. Connect to the robot's router over WiFi from your machine, navigate to the project directory (again, instructions above), and run the command `./gradlew deploy`. It will connect to the robot and then deploy code. 
 
