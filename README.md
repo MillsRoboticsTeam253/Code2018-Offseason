@@ -14,15 +14,18 @@ Once you have a version of the code on your machine (follow the instructions bel
 - **IntelliJ**: Other IDEs, such and Eclipse and VS Code will also work, but this code is targeted toward users of [IntelliJ](https://www.jetbrains.com/idea/).
 
 ### Installing and Using Git
-To get started, you'll first have to install Git on your machine. Open [this link](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), navigate to the instruction section for your machine's OS, and follow the instructions there. Restart your machine if you want to be safe.
+1. To get started, you'll first have to install Git on your machine. Open [this link](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), navigate to the instruction section for your machine's operating system, and follow the instructions there.
 
-Then, create a folder for this project. I personally use the one IntelliJ generates, located at `user/IdeaProjects`, (where `user` is your user directory) and create a folder inside named `Code2018`.
+2. Then, create a folder for this project. I personally use the one IntelliJ generates, located at `YOUR_USER_FOLDER/IdeaProjects`, (where `YOUR_USER_FOLDER` is your user directory).
 
-Finally, open your native command line processor. On MacOS this will be Terminal; and on Windows, cmd (I prefer Powershell but you can use either). 
+3. Open your native command line processor. On MacOS this will be Terminal; and on Windows, cmd (I prefer Powershell but you can use either). 
 
-Here is where things will get difficult. Due to the various places your project folder could be, I cannot give instructions that will work for everyone. I also do not have a Mac and cannot attest to the functionality of this next step. However, for the sake of consistency, I will assume you have your project folder in `user/IdeaProjects/Code2018` Run the command `cd /IdeaProjects/Code2018` on Mac, and `cd C:\Users\user\IdeaProjects\Code2018` on Windows.
+4. Navigate to the folder you created in step 2 using the command line. Examples for Windows and MacOS below. If you need further assistance, you can look up the "change directory" command for your operating system.
+	- **MacOS**: `cd \IdeaProjects\`
+	- **Windows**: `cd C:\Users\YOUR_USER_FOLDER\IdeaProjects`
 
-Finally, run `git clone https://github.com/MillsRoboticsTeam253/Code2018-Offseason.git`. This should fetch the code from this repo and download it to the folder you navigated to in the previous step.
+5. Finally, run: `git clone https://github.com/MillsRoboticsTeam253/Code2018-Offseason.git`. 
+This should fetch the code from this repo and download it to the folder you navigated to in the previous step.
 
 You should now have a (hopefully) functioning version of this year's code. Get coding!
 
