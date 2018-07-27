@@ -2,7 +2,7 @@
 This functions as a test and development repo for team 253's 2018 offseason code. 
 
 ## Changes from Code2018
-In preparation for the new 2019 WPILib control system, we have moved to using Intellij as an IDE and Gradle for robot code deployment. To get the most out of this code, install IntelliJ on your machine and open `Code2018.ipr`. It should take a moment to import the Gradle project. After it loads, you can use the keyboard shortcut `Alt+1` to get to the project manager.
+In preparation for the new 2019 WPILib control system, we have moved to using Intellij as an IDE and Gradle for robot code deployment. To get the most out of this code, install [IntelliJ](https://www.jetbrains.com/idea/) on your machine and open `Code2018.ipr`. It should take a moment to import the Gradle project. After it loads, you can use the keyboard shortcut `Alt+1` to get to the project manager.
 
 ## Getting Started
 
