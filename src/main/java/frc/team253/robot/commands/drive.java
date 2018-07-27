@@ -63,6 +63,9 @@ public class drive extends Command {
                 left = throttle+throttle*wheel;
                 right = throttle-throttle*wheel;
             }
+
+            //left = Math.copySign(Math.pow(left,2),left);
+            //right = Math.copySign(Math.pow(right,2),right);
         }
 
         //DRIVETRAIN CHARACTERIZATION NUMBER PROCESSING

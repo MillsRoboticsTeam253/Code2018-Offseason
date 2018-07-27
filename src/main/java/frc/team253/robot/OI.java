@@ -1,5 +1,6 @@
 package frc.team253.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -9,6 +10,7 @@ import frc.team253.robot.utils.XBPovButton;
 import jaci.pathfinder.Waypoint;
 
 import static edu.wpi.first.wpilibj.GenericHID.Hand;
+import static frc.team253.robot.Robot.drivetrain;
 import static frc.team253.robot.Robot.elevator;
 import static frc.team253.robot.utils.Constants.POVConstants.*;
 
@@ -60,7 +62,7 @@ public class OI {
 
 
         dpadUP.whenPressed(new RunCommand(()->{
-            elevator.elevatorControl.setSetpoint(0);
+            drivetrain.resetEncoders();
         }));
 
         dpadLEFT.whileHeld(new pathFollow("Straight5ft"));
@@ -76,8 +78,21 @@ public class OI {
 
         dpadRIGHT.whileHeld(new pathFollow(runPoints));
 
-        dpadUP.whileHeld(new pathFollow(runPoints2));
+        dpadDOWN.whileHeld(new pathFollow(runPoints2));
 
+        ButtonX.whenPressed(new RunCommand(()->{
+            drivetrain.leftBack.setNeutralMode(NeutralMode.Coast);
+            drivetrain.leftFront.setNeutralMode(NeutralMode.Coast);
+            drivetrain.rightBack.setNeutralMode(NeutralMode.Coast);
+            drivetrain.rightFront.setNeutralMode(NeutralMode.Coast);
+        }));
+
+        ButtonY.whenPressed(new RunCommand(()->{
+            drivetrain.leftBack.setNeutralMode(NeutralMode.Brake);
+            drivetrain.leftFront.setNeutralMode(NeutralMode.Brake);
+            drivetrain.rightBack.setNeutralMode(NeutralMode.Brake);
+            drivetrain.rightFront.setNeutralMode(NeutralMode.Brake);
+        }));
     }
 
     public double throttleValue() {

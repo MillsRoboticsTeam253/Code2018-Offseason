@@ -84,6 +84,6 @@ public class Constants {
     public static final double kLVeloCharSlopeR = 246;
     public static final double kLVeloCharInterceptR = 1.081;
 
-    public static final double kDriveDeadband = 0.05;
+    public static final double kDriveDeadband = 0.1;
 }
 

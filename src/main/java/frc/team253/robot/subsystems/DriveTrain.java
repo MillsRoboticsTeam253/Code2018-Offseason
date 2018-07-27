@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team253.robot.utils.Constants;
 import frc.team253.robot.RobotMap;
 import frc.team253.robot.commands.drive;
@@ -72,6 +73,14 @@ public class DriveTrain extends Subsystem {
 
         leftBack.set(ControlMode.PercentOutput, leftspeed);
         rightFront.set(ControlMode.PercentOutput, rightspeed);
+
+        SmartDashboard.putNumber("left back" ,leftBack.getMotorOutputVoltage());
+        SmartDashboard.putNumber("left front" ,leftFront.getMotorOutputVoltage());
+        SmartDashboard.putNumber("right back" ,rightBack.getMotorOutputVoltage());
+        SmartDashboard.putNumber("right front" ,rightFront.getMotorOutputVoltage());
+
+        SmartDashboard.putNumber("left encoder", leftBack.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("right encoder", rightFront.getSelectedSensorPosition(0));
 
     }
 

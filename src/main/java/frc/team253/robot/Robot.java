@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         Waypoint[] runPoints = new Waypoint[]{ //TEMPORARY
                 new Waypoint(0, 0, 0),
-                new Waypoint(1.524, 0, 0)
+                new Waypoint(3, 0, 0)
         };
         new pathFollow(runPoints).start();
     }
