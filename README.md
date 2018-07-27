@@ -5,26 +5,26 @@ This functions as a test and development repo for team 253's 2018 offseason code
 In preparation for the new 2019 WPILib control system, we have moved to using Intellij as an IDE and GradleRIO for robot code deployment. 
 
 ## Getting Started
-Once you have a version of the code on your machine (follow the instructions below this section), you can install [IntelliJ](https://www.jetbrains.com/idea/). Open the file named `Code2018.ipr` in IntelliJ. It should take a moment to import the Gradle project. Once it is complete, you can use the keyboard shortcut `Alt+1` to open the project window.
+Once you have the code on your machine (follow the instructions below this section), you can open the file named `Code2018.ipr` in IntelliJ. It should take a moment to import the Gradle project. Once it is complete, you can use the keyboard shortcut `Alt+1` to open the project window.
 
 ### Dependencies
-- **Java**: Your machine will need Java, specifically [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
-- **Gradle**: Your machine will also need [Gradle](https://gradle.org/install/). 
-- **Git**: While it is not necessary, you can also install a GUI for Git, such as GitKraken. If you wish to to so, you will still need to install Git. Instructions are below.
-- **IntelliJ**: Other IDEs, such and Eclipse and VS Code will also work, but this code is targeted toward users of [IntelliJ](https://www.jetbrains.com/idea/).
+- [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [Gradle](https://gradle.org/install/)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [IntelliJ](https://www.jetbrains.com/idea/)
+
+Install all dependencies before following any further instructions.
 
 ### Installing and Using Git
-1. To get started, you'll first have to install Git on your machine. Open [this link](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), navigate to the instruction section for your machine's operating system, and follow the instructions there.
+1. First, create a folder for this project. I personally use the one IntelliJ generates, located at `YOUR_USER_FOLDER/IdeaProjects`, (where `YOUR_USER_FOLDER` is your user directory).
 
-2. Then, create a folder for this project. I personally use the one IntelliJ generates, located at `YOUR_USER_FOLDER/IdeaProjects`, (where `YOUR_USER_FOLDER` is your user directory).
+2. Open your native command line processor. On MacOS this will be Terminal; and on Windows, either cmd or Powershell. 
 
-3. Open your native command line processor. On MacOS this will be Terminal; and on Windows, cmd (I prefer Powershell but you can use either). 
-
-4. Navigate to the folder you created in step 2 using the command line. Examples for Windows and MacOS below. If you need further assistance, you can look up the "change directory" command for your operating system.
+3. Navigate to the folder you created in step 2 using the command line. Examples for Windows and MacOS below. If you need further assistance, you can look up the "change directory" command for your operating system.
 	- **MacOS**: `cd \IdeaProjects\`
 	- **Windows**: `cd C:\Users\YOUR_USER_FOLDER\IdeaProjects`
 
-5. Finally, run: `git clone https://github.com/MillsRoboticsTeam253/Code2018-Offseason.git`. 
+4. Finally, run: `git clone https://github.com/MillsRoboticsTeam253/Code2018-Offseason.git`. 
 This should fetch the code from this repo and download it to the folder you navigated to in the previous step.
 
 You should now have a (hopefully) functioning version of this year's code. Get coding!
