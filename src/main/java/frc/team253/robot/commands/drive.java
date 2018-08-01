@@ -1,12 +1,12 @@
 package frc.team253.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.team253.robot.utils.Constants;
 import frc.team253.robot.RobotMap;
 
+import static frc.team253.robot.subsystems.DriveTrain.setBrakeMode;
 import static frc.team253.robot.utils.Constants.*;
 import static frc.team253.robot.Robot.*;
 
@@ -33,8 +33,7 @@ public class drive extends Command {
 
         //Vision when B button is held
 
-        double right = 0;
-        double left = 0;
+        double right, left;
         if(oi.xboxcontroller.getBButton()) {
             double heading_error = -limelight.getxOffset();
             double distance_error = -limelight.getyOffset() / 1.5;
@@ -54,19 +53,18 @@ public class drive extends Command {
 
         } else { //curvature driving
             if (Math.abs(throttle) < kDriveDeadband) { //quickturning if throttle stick is not moved past 5%
-                left = -wheel;
-                right = wheel;
-            } else if (throttle > kDriveDeadband) { //positive drive values
+                left = wheel;
+                right = -wheel;
+            } else { //curvature
                 left =throttle+throttle*wheel;
                 right =throttle-throttle*wheel;
-            } else { //negative drive values
-                left = throttle+throttle*wheel;
-                right = throttle-throttle*wheel;
             }
-
-            //left = Math.copySign(Math.pow(left,2),left);
-            //right = Math.copySign(Math.pow(right,2),right);
+            //Squaring drive values to add sensitivity curve
+            left = Math.copySign(Math.pow(left,2),left);
+            right = Math.copySign(Math.pow(right,2),right);
         }
+
+        setBrakeMode();
 
         //DRIVETRAIN CHARACTERIZATION NUMBER PROCESSING
         if (Math.abs(throttle) > kDriveDeadband || Math.abs(wheel) > kDriveDeadband || oi.xboxcontroller.getBButton()) {
@@ -82,17 +80,8 @@ public class drive extends Command {
                 case kOff:
                     break;
             }
-            drivetrain.leftBack.setNeutralMode(NeutralMode.Brake);
-            drivetrain.leftFront.setNeutralMode(NeutralMode.Brake);
-            drivetrain.rightBack.setNeutralMode(NeutralMode.Brake);
-            drivetrain.rightFront.setNeutralMode(NeutralMode.Brake);
-
             drivetrain.drive(left, right);
         } else {
-            drivetrain.leftBack.setNeutralMode(NeutralMode.Brake);
-            drivetrain.leftFront.setNeutralMode(NeutralMode.Brake);
-            drivetrain.rightBack.setNeutralMode(NeutralMode.Brake);
-            drivetrain.rightFront.setNeutralMode(NeutralMode.Brake);
             drivetrain.drive(0, 0);
         }
     }

@@ -12,6 +12,8 @@
       <entry name="!?*.groovy" />
     </wildcardResourcePatterns>
     <bytecodeTargetLevel target="1.8">
+      <module name="Code2018-Offseason_main" target="1.8" />
+      <module name="Code2018-Offseason_test" target="1.8" />
       <module name="Code2018_main" target="1.8" />
       <module name="Code2018_test" target="1.8" />
       <module name="IdeaProjects-Code2018_main" target="1.8" />
@@ -75,6 +77,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Code2018.iml" filepath="$PROJECT_DIR$/Code2018.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Code2018-Offseason.iml" filepath="$PROJECT_DIR$/Code2018-Offseason.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Code2018-Offseason_main.iml" filepath="$PROJECT_DIR$/Code2018-Offseason_main.iml" group="Code2018-Offseason" />
+      <module fileurl="file://$PROJECT_DIR$/Code2018-Offseason_test.iml" filepath="$PROJECT_DIR$/Code2018-Offseason_test.iml" group="Code2018-Offseason" />
       <module fileurl="file://$PROJECT_DIR$/Code2018_main.iml" filepath="$PROJECT_DIR$/Code2018_main.iml" group="Code2018" />
       <module fileurl="file://$PROJECT_DIR$/Code2018_test.iml" filepath="$PROJECT_DIR$/Code2018_test.iml" group="Code2018" />
       <module fileurl="file://$PROJECT_DIR$/IdeaProjects-Code2018.iml" filepath="$PROJECT_DIR$/IdeaProjects-Code2018.iml" />

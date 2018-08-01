@@ -2,6 +2,7 @@ package frc.team253.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
@@ -22,7 +23,7 @@ public class DriveTrain extends Subsystem {
     public static final TalonSRX leftBack = RobotMap.driveTrainLeftBack;
     public static final TalonSRX leftFront = RobotMap.driveTrainLeftFront;
     public static final TalonSRX rightFront = RobotMap.driveTrainRightFront;
-    public final TalonSRX rightBack = RobotMap.driveTrainRightBack;
+    public static final TalonSRX rightBack = RobotMap.driveTrainRightBack;
 
     private DriveTrain() {
         leftFront.follow(leftBack);
@@ -38,10 +39,10 @@ public class DriveTrain extends Subsystem {
         leftBack.configContinuousCurrentLimit(45, 10);
         rightFront.configContinuousCurrentLimit(45, 10);
 
-        leftFront.setInverted(false);
-        rightFront.setInverted(true);
-        leftBack.setInverted(false);
-        rightBack.setInverted(true);
+        leftFront.setInverted(true);
+        rightFront.setInverted(false);
+        leftBack.setInverted(true);
+        rightBack.setInverted(false);
 
         leftBack.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, 1, 10);
         leftBack.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
@@ -104,6 +105,21 @@ public class DriveTrain extends Subsystem {
     public double getRoll(){
         return gyro.getRoll();
     }
+
+    public static void setBrakeMode(){
+        leftBack.setNeutralMode(NeutralMode.Brake);
+        leftFront.setNeutralMode(NeutralMode.Brake);
+        rightBack.setNeutralMode(NeutralMode.Brake);
+        rightFront.setNeutralMode(NeutralMode.Brake);
+    }
+
+    public static void setCoastMode(){
+        leftBack.setNeutralMode(NeutralMode.Coast);
+        leftFront.setNeutralMode(NeutralMode.Coast);
+        rightBack.setNeutralMode(NeutralMode.Coast);
+        rightFront.setNeutralMode(NeutralMode.Coast);
+    }
+
 
     public static DriveTrain getInstance()
     {

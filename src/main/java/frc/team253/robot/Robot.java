@@ -1,8 +1,8 @@
 package frc.team253.robot;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.team253.robot.pathing.pathFollow;
 import frc.team253.robot.subsystems.DriveTrain;
@@ -11,15 +11,15 @@ import frc.team253.robot.subsystems.Limelight;
 import frc.team253.robot.subsystems.Pneumatics;
 import jaci.pathfinder.Waypoint;
 
-public class Robot extends IterativeRobot {
+import static frc.team253.robot.subsystems.DriveTrain.setBrakeMode;
+
+public class Robot extends TimedRobot {
 
     public static OI oi;
     public static DriveTrain drivetrain;
     public static Pneumatics pneumatics;
     public static Limelight limelight;
     public static Elevator elevator;
-
-
 
     @Override
     public void robotInit() {
@@ -48,10 +48,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-        drivetrain.leftBack.setNeutralMode(NeutralMode.Brake);
-        drivetrain.leftFront.setNeutralMode(NeutralMode.Brake);
-        drivetrain.rightBack.setNeutralMode(NeutralMode.Brake);
-        drivetrain.rightFront.setNeutralMode(NeutralMode.Brake);
+        setBrakeMode();
     }
 
     @Override
