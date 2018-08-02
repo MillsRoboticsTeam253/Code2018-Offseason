@@ -35,15 +35,23 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void disabledInit() {
+        drivetrain.leftBack.setNeutralMode(NeutralMode.Brake);
+        drivetrain.leftFront.setNeutralMode(NeutralMode.Brake);
+        drivetrain.rightBack.setNeutralMode(NeutralMode.Brake);
+        drivetrain.rightFront.setNeutralMode(NeutralMode.Brake);
     }
 
     @Override
     public void autonomousInit() {
+        drivetrain.leftBack.setNeutralMode(NeutralMode.Coast);
+        drivetrain.leftFront.setNeutralMode(NeutralMode.Coast);
+        drivetrain.rightBack.setNeutralMode(NeutralMode.Coast);
+        drivetrain.rightFront.setNeutralMode(NeutralMode.Coast);
         Waypoint[] runPoints = new Waypoint[]{ //TEMPORARY
                 new Waypoint(0, 0, 0),
                 new Waypoint(3, 0, 0)
         };
-        new pathFollow(runPoints).start();
+        new pathFollow("Straight5ft").start();
     }
 
     @Override

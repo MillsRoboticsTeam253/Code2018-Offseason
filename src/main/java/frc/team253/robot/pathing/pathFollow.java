@@ -21,7 +21,7 @@ import static frc.team253.robot.RobotMap.gyro;
 
 public class pathFollow extends Command {
 
-    private double kP = 0, kI = 0, kD = 0, kV = 1/4.1861967305, kA = 0;
+    private double kP = 0, kI = 0, kD = 0, kV = 1/2.53, kA = 0;
     Trajectory trajecLeft, trajecRight;
     EncoderFollower followerLeft, followerRight;
 
@@ -40,16 +40,16 @@ public class pathFollow extends Command {
         followerRight = new EncoderFollower(trajecRight);
 
         followerLeft.configureEncoder(DriveTrain.leftBack.getSelectedSensorPosition(0),
-                4096, Constants.kWheelDiameterMeters);
+                4400, Constants.kWheelDiameterMeters);
         followerRight.configureEncoder(DriveTrain.rightFront.getSelectedSensorPosition(0),
-                4096, Constants.kWheelDiameterMeters);
+                4400, Constants.kWheelDiameterMeters);
 
         followerLeft.configurePIDVA(kP, kI, kD, kV, kA);
         followerRight.configurePIDVA(kP, kI, kD, kV, kA);
     }
 
     public pathFollow(Waypoint[] points){
-        Trajectory.Config pointsConfig = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_LOW, Constants.kTimeStepGlobal, 4, 2, 15);
+        Trajectory.Config pointsConfig = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_LOW, Constants.kTimeStepGlobal, 3.6, 2, 15);
         Trajectory pointsTrajec = Pathfinder.generate(points, pointsConfig);
 
         TankModifier modifier = new TankModifier(pointsTrajec);
@@ -61,9 +61,9 @@ public class pathFollow extends Command {
         followerRight = new EncoderFollower(trajecRight);
 
         followerLeft.configureEncoder(DriveTrain.leftBack.getSelectedSensorPosition(0),
-                4096, Constants.kWheelDiameterMeters);
+                3072, Constants.kWheelDiameterMeters);
         followerRight.configureEncoder(DriveTrain.rightFront.getSelectedSensorPosition(0),
-                4096, Constants.kWheelDiameterMeters);
+                3072, Constants.kWheelDiameterMeters);
 
         followerLeft.configurePIDVA(kP, kI, kD, kV, kA);
         followerRight.configurePIDVA(kP, kI, kD, kV, kA);
@@ -95,10 +95,10 @@ public class pathFollow extends Command {
         double gyroHeading = gyro.getYaw();
         double desiredHeading = Pathfinder.r2d(followerLeft.getHeading());
         double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
-        double turn = .8 * (-1.0/80.0) * angleDifference*0; //REMEMBER TO TUNE THIS LATER
+        double turn = .8 * (-1.0/80.0) * angleDifference; //REMEMBER TO TUNE THIS LATER
 
-        double leftspeed = -(left+turn);
-        double rightspeed = -(right-turn);
+        double leftspeed = -(left-turn);
+        double rightspeed = -(right+turn);
 
         SmartDashboard.putNumber("leftspeed",leftspeed);
         SmartDashboard.putNumber("rightspeed",rightspeed);
