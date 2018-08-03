@@ -7,7 +7,8 @@ plugins {
 }
 
 def TEAM = 253
-def ROBOT_CLASS = "frc.team253.robot.Robot"
+//def ROBOT_CLASS = "frc.team253.robot.Robot"
+def ROBOT_CLASS = "frc.team253.robot.IntakeTest"
 
 task generateProfiles(type:Exec) {
     workingDir 'profiles'
