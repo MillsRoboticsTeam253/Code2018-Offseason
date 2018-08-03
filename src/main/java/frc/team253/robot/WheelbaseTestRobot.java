@@ -95,6 +95,6 @@ public class WheelbaseTestRobot extends IterativeRobot {
 
         leftBack.set(ControlMode.PercentOutput, left);
         rightFront.set(ControlMode.PercentOutput, right);
-    }
 
+    }
 }
