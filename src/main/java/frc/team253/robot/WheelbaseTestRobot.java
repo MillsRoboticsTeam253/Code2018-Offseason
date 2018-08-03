@@ -16,25 +16,26 @@ public class WheelbaseTestRobot extends IterativeRobot {
     public static AHRS gyro;
     public double gyroHeading;
 
+    //Declaring my constants
+
     public static double speedConstant = 0.25;
     public static double rotations = 10;
 
     @Override
     public void teleopPeriodic() {
+        if(isEnabled()){ // Enable check for safety
 
-        if(isEnabled()){
-
-            if(controller.getRawButtonPressed(1)){
+            if(controller.getRawButtonPressed(1)){ //Resets encoder on the leading edge of press
                 resetEncoders();
             }
-
-            if(controller.getRawButton(1)) {
+            if(controller.getRawButton(1)) { //When A button is held
                 gyroHeading = gyro.getYaw();
 
                 if(gyroHeading <= 360*rotations){
-                    drive(-speedConstant, speedConstant);
+                    drive(-speedConstant, speedConstant); //Spins the robot rotation times
 
-                } else {
+                } else { //Prints all important info to console once rotations are complete to minimize error from inertia
+
                     System.out.println("left encoder: " + leftBack.getSelectedSensorPosition(0));
                     System.out.println("right encoder " + rightFront.getSelectedSensorPosition(0));
 
@@ -46,11 +47,8 @@ public class WheelbaseTestRobot extends IterativeRobot {
 
                     System.out.println("avg overall diameter: " + (leftDiameter*rightDiameter)/2);
                 }
-
             }
-
         }
-
     }
 
     @Override
@@ -83,6 +81,7 @@ public class WheelbaseTestRobot extends IterativeRobot {
 
     }
 
+    //Resets encoders and gyro
     public void resetEncoders() {
 
         gyro.reset();
@@ -91,7 +90,9 @@ public class WheelbaseTestRobot extends IterativeRobot {
 
     }
 
+    //Drives talons at left/right speed
     public void drive(double left, double right) {
+
         leftBack.set(ControlMode.PercentOutput, left);
         rightFront.set(ControlMode.PercentOutput, right);
     }
