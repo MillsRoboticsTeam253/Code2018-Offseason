@@ -13,41 +13,6 @@ public class IntakeTest extends IterativeRobot {
     public static TalonSRX driveTrainLeftBack;
 
     @Override
-    public void disabledInit() {
-
-    }
-
-    @Override
-    public void autonomousInit() {
-
-    }
-
-    @Override
-    public void teleopInit() {
-
-    }
-
-    @Override
-    public void testInit() {
-
-    }
-
-    @Override
-    public void robotPeriodic() {
-
-    }
-
-    @Override
-    public void disabledPeriodic() {
-
-    }
-
-    @Override
-    public void autonomousPeriodic() {
-
-    }
-
-    @Override
     public void teleopPeriodic() {
         while(isEnabled()){
             double speed =xbox1.getY(GenericHID.Hand.kLeft);
@@ -58,12 +23,7 @@ public class IntakeTest extends IterativeRobot {
             }
         }
     }
-
-    @Override
-    public void testPeriodic() {
-
-    }
-
+    
     @Override
     public void robotInit() {
         driveTrainLeftFront = new TalonSRX(3);
