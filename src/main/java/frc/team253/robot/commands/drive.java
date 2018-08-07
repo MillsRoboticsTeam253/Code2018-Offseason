@@ -56,16 +56,13 @@ public class drive extends Command {
             if (Math.abs(throttle) < kDriveDeadband) { //quickturning if throttle stick is not moved past 5%
                 left = -wheel;
                 right = wheel;
-            } else if (throttle > kDriveDeadband) { //positive drive values
-                left =throttle+throttle*wheel;
-                right =throttle-throttle*wheel;
-            } else { //negative drive values
+            } else {
                 left = throttle+throttle*wheel;
                 right = throttle-throttle*wheel;
             }
 
-            //left = Math.copySign(Math.pow(left,2),left);
-            //right = Math.copySign(Math.pow(right,2),right);
+            left = Math.copySign(Math.pow(left,3),left);
+            right = Math.copySign(Math.pow(right,3),right);
         }
 
         //DRIVETRAIN CHARACTERIZATION NUMBER PROCESSING

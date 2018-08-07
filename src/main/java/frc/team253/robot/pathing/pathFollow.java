@@ -21,7 +21,7 @@ import static frc.team253.robot.RobotMap.gyro;
 
 public class pathFollow extends Command {
 
-    private double kP = 0, kI = 0, kD = 0, kV = 1/2.53, kA = 0;
+    private double kP = 0, kI = 0, kD = 0, kV = 1/2.872716583788768, kA = 0;
     Trajectory trajecLeft, trajecRight;
     EncoderFollower followerLeft, followerRight;
 
@@ -40,9 +40,9 @@ public class pathFollow extends Command {
         followerRight = new EncoderFollower(trajecRight);
 
         followerLeft.configureEncoder(DriveTrain.leftBack.getSelectedSensorPosition(0),
-                4400, Constants.kWheelDiameterMeters);
+                4517, Constants.kWheelDiameterMeters);
         followerRight.configureEncoder(DriveTrain.rightFront.getSelectedSensorPosition(0),
-                4400, Constants.kWheelDiameterMeters);
+                4517, Constants.kWheelDiameterMeters);
 
         followerLeft.configurePIDVA(kP, kI, kD, kV, kA);
         followerRight.configurePIDVA(kP, kI, kD, kV, kA);
@@ -61,9 +61,9 @@ public class pathFollow extends Command {
         followerRight = new EncoderFollower(trajecRight);
 
         followerLeft.configureEncoder(DriveTrain.leftBack.getSelectedSensorPosition(0),
-                3072, Constants.kWheelDiameterMeters);
+                4517, Constants.kWheelDiameterMeters);
         followerRight.configureEncoder(DriveTrain.rightFront.getSelectedSensorPosition(0),
-                3072, Constants.kWheelDiameterMeters);
+                4517, Constants.kWheelDiameterMeters);
 
         followerLeft.configurePIDVA(kP, kI, kD, kV, kA);
         followerRight.configurePIDVA(kP, kI, kD, kV, kA);
@@ -72,6 +72,11 @@ public class pathFollow extends Command {
     protected void initialize(){
         drivetrain.resetGyro();
         drivetrain.resetEncoders();
+
+        drivetrain.leftBack.setNeutralMode(NeutralMode.Coast);
+        drivetrain.leftFront.setNeutralMode(NeutralMode.Coast);
+        drivetrain.rightBack.setNeutralMode(NeutralMode.Coast);
+        drivetrain.rightFront.setNeutralMode(NeutralMode.Coast);
     }
 
     protected void execute() {
@@ -92,19 +97,19 @@ public class pathFollow extends Command {
         double left = followerLeft.calculate(Robot.drivetrain.leftBack.getSelectedSensorPosition(0));
         double right = followerRight.calculate(Robot.drivetrain.rightFront.getSelectedSensorPosition(0));
 
-        double gyroHeading = gyro.getYaw();
-        double desiredHeading = Pathfinder.r2d(followerLeft.getHeading());
+        double gyroHeading = -gyro.getAngle();
+        double desiredHeading = Pathfinder.r2d(followerRight.getHeading());
         double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
         double turn = .8 * (-1.0/80.0) * angleDifference; //REMEMBER TO TUNE THIS LATER
 
-        double leftspeed = -(left-turn);
-        double rightspeed = -(right+turn);
+        double leftspeed = (left+turn);
+        double rightspeed = (right-turn);
 
-        SmartDashboard.putNumber("leftspeed",leftspeed);
-        SmartDashboard.putNumber("rightspeed",rightspeed);
+        SmartDashboard.putNumber("leftspeed",-leftspeed);
+        SmartDashboard.putNumber("rightspeed",-rightspeed);
 
-        SmartDashboard.putNumber("left encoder",-drivetrain.leftBack.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("right encoder",-drivetrain.rightFront.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("left encoder",drivetrain.leftBack.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("right encoder",drivetrain.rightFront.getSelectedSensorPosition(0));
 
 //        System.out.println(followerLeft.getSegment());
 //        System.out.println(followerRight.getSegment());
@@ -112,7 +117,7 @@ public class pathFollow extends Command {
         //leftspeed = drive.processDriveChar(leftspeed,Constants.kLRobotVmax,Constants.kLVeloCharSlopeL,Constants.kLVeloCharInterceptL);
         //rightspeed = drive.processDriveChar(rightspeed,Constants.kLRobotVmax,Constants.kLVeloCharSlopeR,Constants.kLVeloCharInterceptR);
 
-        Robot.drivetrain.drive(leftspeed, rightspeed);
+        Robot.drivetrain.drive(-leftspeed, -rightspeed);
     }
 
     @Override

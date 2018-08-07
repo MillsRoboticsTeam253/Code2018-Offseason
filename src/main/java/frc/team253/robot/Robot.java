@@ -47,11 +47,7 @@ public class Robot extends IterativeRobot {
         drivetrain.leftFront.setNeutralMode(NeutralMode.Coast);
         drivetrain.rightBack.setNeutralMode(NeutralMode.Coast);
         drivetrain.rightFront.setNeutralMode(NeutralMode.Coast);
-        Waypoint[] runPoints = new Waypoint[]{ //TEMPORARY
-                new Waypoint(0, 0, 0),
-                new Waypoint(3, 0, 0)
-        };
-        new pathFollow("Straight5ft").start();
+        new pathFollow("CtoRSwitch").start();
     }
 
     @Override
