@@ -16,10 +16,13 @@ public class WheelbaseTestRobot extends IterativeRobot {
     public static AHRS gyro;
     public double gyroHeading;
 
+    public static boolean active = false;
+
     //Declaring my constants
 
-    public static double speedConstant = 0.25;
-    public static double rotations = 10;
+    public static double speedConstant = 0.075;
+    public static double rotations = 1;
+
 
     @Override
     public void teleopPeriodic() {
@@ -27,27 +30,38 @@ public class WheelbaseTestRobot extends IterativeRobot {
 
             if(controller.getRawButtonPressed(1)){ //Resets encoder on the leading edge of press
                 resetEncoders();
+                active = true;
             }
-            if(controller.getRawButton(1)) { //When A button is held
-                gyroHeading = gyro.getYaw();
+
+            if(controller.getRawButtonReleased(1)){
+                active = false;
+            }
+
+            if(active) {
+                gyroHeading = gyro.getAngle();
 
                 if(gyroHeading <= 360*rotations){
                     drive(-speedConstant, speedConstant); //Spins the robot rotation times
 
                 } else { //Prints all important info to console once rotations are complete to minimize error from inertia
 
-                    System.out.println("left encoder: " + leftBack.getSelectedSensorPosition(0));
+                    System.out.println("left encoder: " + -leftBack.getSelectedSensorPosition(0));
                     System.out.println("right encoder " + rightFront.getSelectedSensorPosition(0));
 
-                    double leftDiameter = leftBack.getSelectedSensorPosition(0)/rotations*Math.PI;
+                    double leftDiameter = -leftBack.getSelectedSensorPosition(0)/rotations*Math.PI;
                     double rightDiameter = rightFront.getSelectedSensorPosition(0)/rotations*Math.PI;
 
                     System.out.println("avg left diameter: " + leftDiameter);
                     System.out.println("avg right diameter: " + rightDiameter);
 
                     System.out.println("avg overall diameter: " + (leftDiameter*rightDiameter)/2);
+
+                    active = false;
                 }
+            } else {
+                drive(0,0);
             }
+
         }
     }
 

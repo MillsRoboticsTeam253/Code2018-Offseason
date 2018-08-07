@@ -8,8 +8,8 @@ plugins {
 
 def TEAM = 253
 //def ROBOT_CLASS = "frc.team253.robot.Robot"
-def ROBOT_CLASS = "frc.team253.robot.IntakeTest"
-
+//def ROBOT_CLASS = "frc.team253.robot.IntakeTest"
+def ROBOT_CLASS = "frc.team253.robot.WheelbaseTestRobot"
 task generateProfiles(type:Exec) {
     workingDir 'profiles'
     commandLine 'java', '-jar', '../generation/path-util-1.2.jar'
