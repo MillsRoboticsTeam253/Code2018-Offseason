@@ -4,34 +4,34 @@
       {"x": 0, "y": 0, "angle": 0},
       {"x": 1.524, "y": 0, "angle": 0}
     ],
-    "flip": false
+    "flip": true
   },
   "RtoRSwitch": {
     "points": [
       {"x": 0.466344, "y": 1.194816, "angle": 0},
-      {"x": 3.643480343, "y": 2.0165480343, "angle": 45}
+      {"x": 3.643480343, "y": 2.0165480343, "angle": 0.78539816339}
     ],
-    "flip": false
+    "flip": true
   },
   "RtoRScale": {
     "points": [
       {"x": 0.466344, "y": 1.194816, "angle": 0},
-      {"x": 7.755992, "y": 1.264792, "angle": 45}
+      {"x": 7.755992, "y": 1.264792, "angle": 0.78539816339}
     ],
-    "flip": false
+    "flip": true
   },
   "CtoRSwitch": {
     "points": [
       {"x": 0.466344, "y": 3.989832, "angle": 0},
       {"x": 3.515056, "y": 2.38224, "angle": 0}
     ],
-    "flip": false
+    "flip": true
   },
   "CtoLSwitch": {
     "points": [
       {"x": 0.466344, "y": 3.989832, "angle": 0},
       {"x": 3.515056, "y": 5.81688, "angle": 0}
     ],
-    "flip": false
+    "flip": true
   }
 }

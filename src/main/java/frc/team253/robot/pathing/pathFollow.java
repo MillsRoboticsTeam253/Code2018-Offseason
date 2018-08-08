@@ -18,6 +18,9 @@ import java.io.File;
 
 import static frc.team253.robot.Robot.drivetrain;
 import static frc.team253.robot.RobotMap.gyro;
+import static frc.team253.robot.commands.drive.processDriveChar;
+import static frc.team253.robot.subsystems.DriveTrain.setCoastMode;
+import static frc.team253.robot.utils.Constants.*;
 
 public class pathFollow extends Command {
 
@@ -81,10 +84,7 @@ public class pathFollow extends Command {
 
     protected void execute() {
 
-        drivetrain.leftBack.setNeutralMode(NeutralMode.Coast);
-        drivetrain.leftFront.setNeutralMode(NeutralMode.Coast);
-        drivetrain.rightBack.setNeutralMode(NeutralMode.Coast);
-        drivetrain.rightFront.setNeutralMode(NeutralMode.Coast);
+        setCoastMode();
 
         kP = SmartDashboard.getNumber("P gain", kP);
         kI = SmartDashboard.getNumber("I gain", kI);
@@ -92,7 +92,6 @@ public class pathFollow extends Command {
 
         followerLeft.configurePIDVA(kP, kI, kD, kV, kA);
         followerRight.configurePIDVA(kP, kI, kD, kV, kA);
-
 
         double left = followerLeft.calculate(Robot.drivetrain.leftBack.getSelectedSensorPosition(0));
         double right = followerRight.calculate(Robot.drivetrain.rightFront.getSelectedSensorPosition(0));
@@ -111,11 +110,8 @@ public class pathFollow extends Command {
         SmartDashboard.putNumber("left encoder",drivetrain.leftBack.getSelectedSensorPosition(0));
         SmartDashboard.putNumber("right encoder",drivetrain.rightFront.getSelectedSensorPosition(0));
 
-//        System.out.println(followerLeft.getSegment());
-//        System.out.println(followerRight.getSegment());
-
-        //leftspeed = drive.processDriveChar(leftspeed,Constants.kLRobotVmax,Constants.kLVeloCharSlopeL,Constants.kLVeloCharInterceptL);
-        //rightspeed = drive.processDriveChar(rightspeed,Constants.kLRobotVmax,Constants.kLVeloCharSlopeR,Constants.kLVeloCharInterceptR);
+        leftspeed = processDriveChar(left, Constants.kHRobotVmax, kHVeloCharSlopeL,kHVeloCharInterceptL);
+        rightspeed = processDriveChar(right, Constants.kHRobotVmax, kHVeloCharSlopeR,kHVeloCharInterceptR);
 
         Robot.drivetrain.drive(-leftspeed, -rightspeed);
     }

@@ -1,14 +1,13 @@
-package frc.team253.robot.commands;
+package frc.team253.robot.subsystems.Drivetrain.commands;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.team253.robot.utils.Constants;
 import frc.team253.robot.RobotMap;
 
-import static frc.team253.robot.utils.Constants.*;
+import static frc.team253.robot.subsystems.Drivetrain.DrivetrainSubsystem.setBrakeMode;
 import static frc.team253.robot.Robot.*;
+import static frc.team253.robot.subsystems.Drivetrain.DrivetrainConstants.*;
 
 public class drive extends Command {
     double kPAim = -0.1;
@@ -19,7 +18,6 @@ public class drive extends Command {
     public drive() {
         requires(drivetrain);
     }
-
 
     protected void execute() {
 
@@ -33,8 +31,7 @@ public class drive extends Command {
 
         //Vision when B button is held
 
-        double right = 0;
-        double left = 0;
+        double right, left;
         if(oi.xboxcontroller.getBButton()) {
             double heading_error = -limelight.getxOffset();
             double distance_error = -limelight.getyOffset() / 1.5;
@@ -53,43 +50,37 @@ public class drive extends Command {
             right = (steering_adjust - distance_adjust) / 1.5;
 
         } else { //curvature driving
-            if (Math.abs(throttle) < kDriveDeadband) { //quickturning if throttle stick is not moved past 5%
-                left = -wheel;
-                right = wheel;
-            } else {
-                left = throttle+throttle*wheel;
-                right = throttle-throttle*wheel;
+            if (Math.abs(throttle) < kJoystickDeadband) { //quickturning if throttle stick is not moved past 5%
+                left = wheel;
+                right = -wheel;
+            } else { //curvature
+                left =throttle+throttle*wheel;
+                right =throttle-throttle*wheel;
             }
 
-            left = Math.copySign(Math.pow(left,3),left);
-            right = Math.copySign(Math.pow(right,3),right);
+            //Squaring drive values to add sensitivity curve
+            left = Math.copySign(Math.pow(left,2),left);
+            right = Math.copySign(Math.pow(right,2),right);
         }
 
+        setBrakeMode();
+
         //DRIVETRAIN CHARACTERIZATION NUMBER PROCESSING
-        if (Math.abs(throttle) > kDriveDeadband || Math.abs(wheel) > kDriveDeadband || oi.xboxcontroller.getBButton()) {
+        if (Math.abs(throttle) > kJoystickDeadband || Math.abs(wheel) > kJoystickDeadband || oi.xboxcontroller.getBButton()) {
 
             switch(RobotMap.solenoid1.get()){
                 case kForward:
-                    left = processDriveChar(left, Constants.kHRobotVmax, kHVeloCharSlopeL,kHVeloCharInterceptL);
-                    right = processDriveChar(right, Constants.kHRobotVmax, kHVeloCharSlopeR,kHVeloCharInterceptR);
+                    left = processDriveChar(left, kVmaxHigh, kLslopeHigh,kLinterceptHigh);
+                    right = processDriveChar(right, kVmaxHigh, kRslopeHigh,kRinterceptHigh);
                     break;
                 case kReverse:
-                    left = processDriveChar(left, kLRobotVmax, kLVeloCharSlopeL,kLVeloCharInterceptL);
-                    right = processDriveChar(right, kLRobotVmax, kLVeloCharSlopeR,kLVeloCharInterceptR);
+                    left = processDriveChar(left, kVmaxLow, kLslopeLow,kLinterceptLow);
+                    right = processDriveChar(right, kVmaxLow, kRslopeLow,kRinterceptLow);
                 case kOff:
                     break;
             }
-            drivetrain.leftBack.setNeutralMode(NeutralMode.Brake);
-            drivetrain.leftFront.setNeutralMode(NeutralMode.Brake);
-            drivetrain.rightBack.setNeutralMode(NeutralMode.Brake);
-            drivetrain.rightFront.setNeutralMode(NeutralMode.Brake);
-
             drivetrain.drive(left, right);
         } else {
-            drivetrain.leftBack.setNeutralMode(NeutralMode.Brake);
-            drivetrain.leftFront.setNeutralMode(NeutralMode.Brake);
-            drivetrain.rightBack.setNeutralMode(NeutralMode.Brake);
-            drivetrain.rightFront.setNeutralMode(NeutralMode.Brake);
             drivetrain.drive(0, 0);
         }
     }
