@@ -49,16 +49,16 @@ public class curvatureDrive extends Command {
 
         } else { //curvature driving
             if (Math.abs(throttle) < kJoystickDeadband) {
-                left = wheel;
-                right = -wheel;
+                left = -wheel;
+                right = wheel;
             } else { //curvature
                 left =throttle+throttle*wheel;
                 right =throttle-throttle*wheel;
             }
 
             //Squaring drive values to add sensitivity curve
-            left = Math.copySign(Math.pow(left,2),left);
-            right = Math.copySign(Math.pow(right,2),right);
+            //left = Math.copySign(Math.pow(left,2),left);
+            //right = Math.copySign(Math.pow(right,2),right);
         }
 
         setBrakeMode();
@@ -66,17 +66,17 @@ public class curvatureDrive extends Command {
         //DRIVETRAIN CHARACTERIZATION NUMBER PROCESSING
         if (Math.abs(throttle) > kJoystickDeadband || Math.abs(wheel) > kJoystickDeadband || oi.xboxcontroller.getBButton()) {
 
-            switch(DrivetrainSubsystem.shifter.get()){
-                case kForward:
-                    left = processDriveChar(left, kVmaxHigh, kLslopeHigh,kLinterceptHigh);
-                    right = processDriveChar(right, kVmaxHigh, kRslopeHigh,kRinterceptHigh);
-                    break;
-                case kReverse:
-                    left = processDriveChar(left, kVmaxLow, kLslopeLow,kLinterceptLow);
-                    right = processDriveChar(right, kVmaxLow, kRslopeLow,kRinterceptLow);
-                case kOff:
-                    break;
-            }
+//            switch(DrivetrainSubsystem.shifter.get()){
+//                case kForward:
+//                    left = processDriveChar(left, kVmaxHigh, kLslopeHigh,kLinterceptHigh);
+//                    right = processDriveChar(right, kVmaxHigh, kRslopeHigh,kRinterceptHigh);
+//                    break;
+//                case kReverse:
+//                    left = processDriveChar(left, kVmaxLow, kLslopeLow,kLinterceptLow);
+//                    right = processDriveChar(right, kVmaxLow, kRslopeLow,kRinterceptLow);
+//                case kOff:
+//                    break;
+            //}
             drivetrain.drive(left, right);
         } else {
             drivetrain.drive(0, 0);

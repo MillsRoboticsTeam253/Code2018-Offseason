@@ -21,11 +21,12 @@ public class elevate extends Command {
 
 
         if(Math.abs(elevateAxis) >= 0.1){
-            elevator.elevatorControl.disable();
+            //elevator.elevatorControl.disable();
             elevator.elevate(elevateAxis);
         }else{
-            elevator.elevatorControl.setSetpoint(leftMotorA.getSelectedSensorPosition(0));
-            elevator.elevatorControl.enable();
+            elevator.elevate(0);
+            //elevator.elevatorControl.setSetpoint(leftMotorA.getSelectedSensorPosition(0));
+            //elevator.elevatorControl.enable();
         }/*
         elevator.elevatorControl.disable();
         if(Math.abs(elevateAxis)>0.1){

@@ -1,4 +1,4 @@
-package frc.team253.robot.subsystems.misc.commands;
+package frc.team253.robot.utilities;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
