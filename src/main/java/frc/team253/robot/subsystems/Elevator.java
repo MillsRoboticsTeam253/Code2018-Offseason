@@ -10,6 +10,8 @@ import frc.team253.robot.utils.ElevatorEncoderSource;
 import frc.team253.robot.RobotMap;
 import frc.team253.robot.commands.elevate;
 
+import static frc.team253.robot.subsystems.Drivetrain.DrivetrainSubsystem.leftMotorB;
+
 public class Elevator extends Subsystem {
     private static Elevator instance = null;
 
@@ -35,6 +37,10 @@ public class Elevator extends Subsystem {
 
     public void elevate(double speed){
         ElevatorSparks.set(speed);
+    }
+
+    public void resetEncoders(){
+        leftMotorB.setSelectedSensorPosition(0,0,10);
     }
 
     @Override

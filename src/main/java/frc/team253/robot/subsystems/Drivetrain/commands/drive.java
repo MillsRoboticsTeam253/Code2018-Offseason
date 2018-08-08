@@ -1,14 +1,13 @@
-package frc.team253.robot.commands;
+package frc.team253.robot.subsystems.Drivetrain.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.team253.robot.utils.Constants;
 import frc.team253.robot.RobotMap;
 
-import static frc.team253.robot.subsystems.DriveTrain.setBrakeMode;
-import static frc.team253.robot.utils.Constants.*;
+import static frc.team253.robot.subsystems.Drivetrain.DrivetrainSubsystem.setBrakeMode;
 import static frc.team253.robot.Robot.*;
+import static frc.team253.robot.subsystems.Drivetrain.DrivetrainConstants.*;
 
 public class drive extends Command {
     double kPAim = -0.1;
@@ -19,7 +18,6 @@ public class drive extends Command {
     public drive() {
         requires(drivetrain);
     }
-
 
     protected void execute() {
 
@@ -52,7 +50,7 @@ public class drive extends Command {
             right = (steering_adjust - distance_adjust) / 1.5;
 
         } else { //curvature driving
-            if (Math.abs(throttle) < kDriveDeadband) { //quickturning if throttle stick is not moved past 5%
+            if (Math.abs(throttle) < kJoystickDeadband) { //quickturning if throttle stick is not moved past 5%
                 left = wheel;
                 right = -wheel;
             } else { //curvature
@@ -67,16 +65,16 @@ public class drive extends Command {
         setBrakeMode();
 
         //DRIVETRAIN CHARACTERIZATION NUMBER PROCESSING
-        if (Math.abs(throttle) > kDriveDeadband || Math.abs(wheel) > kDriveDeadband || oi.xboxcontroller.getBButton()) {
+        if (Math.abs(throttle) > kJoystickDeadband || Math.abs(wheel) > kJoystickDeadband || oi.xboxcontroller.getBButton()) {
 
             switch(RobotMap.solenoid1.get()){
                 case kForward:
-                    left = processDriveChar(left, Constants.kHRobotVmax, kHVeloCharSlopeL,kHVeloCharInterceptL);
-                    right = processDriveChar(right, Constants.kHRobotVmax, kHVeloCharSlopeR,kHVeloCharInterceptR);
+                    left = processDriveChar(left, kVmaxHigh, kLslopeHigh,kLinterceptHigh);
+                    right = processDriveChar(right, kVmaxHigh, kRslopeHigh,kRinterceptHigh);
                     break;
                 case kReverse:
-                    left = processDriveChar(left, kLRobotVmax, kLVeloCharSlopeL,kLVeloCharInterceptL);
-                    right = processDriveChar(right, kLRobotVmax, kLVeloCharSlopeR,kLVeloCharInterceptR);
+                    left = processDriveChar(left, kVmaxLow, kLslopeLow,kLinterceptLow);
+                    right = processDriveChar(right, kVmaxLow, kRslopeLow,kRinterceptLow);
                 case kOff:
                     break;
             }
