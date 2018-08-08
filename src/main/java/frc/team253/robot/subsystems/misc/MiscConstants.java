@@ -1,19 +1,10 @@
-package frc.team253.robot.utils;
+package frc.team253.robot.subsystems.misc;
 
-public class Constants {
+public class MiscConstants {
 
-    public class POVConstants{
-        public static final int
-                NONE = -1,
-                UP = 0,
-                UP_RIGHT = 45,
-                RIGHT = 90,
-                DOWN_RIGHT = 115,
-                DOWN = 180,
-                DOWN_LEFT = 225,
-                LEFT = 270,
-                UP_LEFT = 315;
-    }
+    public static final int compressorNumber = 1;
+
+    public static final double kTimeStep = 0.02;
 
     /**
      * which Talon on CANBus
@@ -68,7 +59,4 @@ public class Constants {
     public static final double kSwitchHeightMeters = 0.41;
     public static final double kScaleHeightMeters = 1.1;
     public static final double kPortalHeightMeters = 0.6858;
-    public static final double kTimeStepGlobal = 0.02;
-
 }
-

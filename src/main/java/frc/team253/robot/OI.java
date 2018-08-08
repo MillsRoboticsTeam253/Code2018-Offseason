@@ -1,18 +1,14 @@
 package frc.team253.robot;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.team253.robot.pathing.pathFollow;
-import frc.team253.robot.utils.RunCommand;
-import frc.team253.robot.utils.XBPovButton;
-import jaci.pathfinder.Waypoint;
+import frc.team253.bobabots.utilities.RunCommand;
+import frc.team253.bobabots.oi.XBPovButton;
 
 import static edu.wpi.first.wpilibj.GenericHID.Hand;
+import static frc.team253.bobabots.oi.XBPovConstants.*;
 import static frc.team253.robot.Robot.drivetrain;
-import static frc.team253.robot.Robot.elevator;
-import static frc.team253.robot.utils.Constants.POVConstants.*;
 
 public class OI {
 
@@ -27,14 +23,13 @@ public class OI {
     public JoystickButton ButtonLT;
     public Joystick elevatorStick;
 
-    public JoystickButton
-            dpadUP;
+    public JoystickButton dpadUP;
     public JoystickButton dpadUP_RIGHT;
     public JoystickButton dpadRIGHT;
     public JoystickButton dpadDOWN_RIGHT;
     public JoystickButton dpadDOWN;
     public JoystickButton dpadDOWN_LEFT;
-    public static JoystickButton dpadLEFT;
+    public JoystickButton dpadLEFT;
     public JoystickButton dpadUP_LEFT;
 
 
@@ -61,38 +56,10 @@ public class OI {
         dpadUP_LEFT = new XBPovButton(xboxcontroller,UP_LEFT);
 
 
-        dpadUP.whenPressed(new RunCommand(()->{
-            drivetrain.resetEncoders();
-        }));
+        dpadUP.whenPressed(new RunCommand( () -> drivetrain.resetEncoders() ));
 
-        dpadLEFT.whileHeld(new pathFollow("Straight5ft"));
+        dpadLEFT.whenPressed(new RunCommand( () -> drivetrain.shiftGear() ));
 
-        Waypoint[] runPoints = new Waypoint[]{ //TEMPORARY
-                new Waypoint(0, 0, 0),
-                new Waypoint(1.524, 0, 0)
-        };
-        Waypoint[] runPoints2 = new Waypoint[]{ //TEMPORARY
-                new Waypoint(0, 0, 0),
-                new Waypoint(30, 0, 0)
-        };
-
-        dpadRIGHT.whileHeld(new pathFollow(runPoints));
-
-        dpadDOWN.whileHeld(new pathFollow(runPoints2));
-
-        ButtonX.whenPressed(new RunCommand(()->{
-            drivetrain.leftBack.setNeutralMode(NeutralMode.Coast);
-            drivetrain.leftFront.setNeutralMode(NeutralMode.Coast);
-            drivetrain.rightBack.setNeutralMode(NeutralMode.Coast);
-            drivetrain.rightFront.setNeutralMode(NeutralMode.Coast);
-        }));
-
-        ButtonY.whenPressed(new RunCommand(()->{
-            drivetrain.leftBack.setNeutralMode(NeutralMode.Brake);
-            drivetrain.leftFront.setNeutralMode(NeutralMode.Brake);
-            drivetrain.rightBack.setNeutralMode(NeutralMode.Brake);
-            drivetrain.rightFront.setNeutralMode(NeutralMode.Brake);
-        }));
     }
 
     public double throttleValue() {

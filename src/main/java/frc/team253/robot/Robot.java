@@ -4,29 +4,26 @@ package frc.team253.robot;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.team253.robot.pathing.pathFollow;
-import frc.team253.robot.subsystems.Drivetrain.DrivetrainSubsystem;
-import frc.team253.robot.subsystems.Elevator;
-import frc.team253.robot.subsystems.Limelight;
-import frc.team253.robot.subsystems.Pneumatics;
-import jaci.pathfinder.Waypoint;
+import frc.team253.robot.subsystems.misc.commands.pathFollow;
+import frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem;
+import frc.team253.robot.subsystems.elevator.Elevator;
+import frc.team253.robot.subsystems.misc.Limelight;
+import frc.team253.robot.subsystems.misc.Miscellaneous;
 
-import static frc.team253.robot.subsystems.Drivetrain.DrivetrainSubsystem.setBrakeMode;
+import static frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem.setBrakeMode;
 
 public class Robot extends TimedRobot {
 
     public static OI oi;
     public static DrivetrainSubsystem drivetrain;
-    public static Pneumatics pneumatics;
     public static Limelight limelight;
     public static Elevator elevator;
 
     @Override
     public void robotInit() {
-        RobotMap.init();
+        Miscellaneous.init();
         drivetrain = DrivetrainSubsystem.getInstance();
         elevator = Elevator.getInstance();
-        pneumatics = Pneumatics.getInstance();
         limelight = Limelight.getInstance();
         oi = new OI();
 
@@ -35,18 +32,12 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
-        drivetrain.leftBack.setNeutralMode(NeutralMode.Brake);
-        drivetrain.leftFront.setNeutralMode(NeutralMode.Brake);
-        drivetrain.rightBack.setNeutralMode(NeutralMode.Brake);
-        drivetrain.rightFront.setNeutralMode(NeutralMode.Brake);
+        //SET BRAKE
     }
 
     @Override
     public void autonomousInit() {
-        drivetrain.leftBack.setNeutralMode(NeutralMode.Coast);
-        drivetrain.leftFront.setNeutralMode(NeutralMode.Coast);
-        drivetrain.rightBack.setNeutralMode(NeutralMode.Coast);
-        drivetrain.rightFront.setNeutralMode(NeutralMode.Coast);
+        //SET COAST
         new pathFollow("CtoRSwitch").start();
     }
 

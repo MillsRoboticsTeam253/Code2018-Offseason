@@ -1,27 +1,25 @@
-package frc.team253.robot.subsystems.Drivetrain.commands;
+package frc.team253.robot.subsystems.drivetrain.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.team253.robot.RobotMap;
+import frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem;
 
-import static frc.team253.robot.subsystems.Drivetrain.DrivetrainSubsystem.setBrakeMode;
 import static frc.team253.robot.Robot.*;
-import static frc.team253.robot.subsystems.Drivetrain.DrivetrainConstants.*;
+import static frc.team253.robot.subsystems.drivetrain.DrivetrainConstants.*;
+import static frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem.setBrakeMode;
 
-public class drive extends Command {
+public class curvatureDrive extends Command {
     double kPAim = -0.1;
     double kPDistance = -0.1;
     double min_aim_command = 0.05;
 
 
-    public drive() {
+    public curvatureDrive() {
         requires(drivetrain);
     }
 
     protected void execute() {
-
-        //OI.dpadLEFT.whileHeld(new pathFollow("Straight5ft"));
 
         double throttle = oi.throttleValue(),
                 wheel = oi.turnValue();
@@ -29,9 +27,9 @@ public class drive extends Command {
         SmartDashboard.putNumber("xOffset", limelight.getxOffset());
         SmartDashboard.putNumber("yOffset", limelight.getyOffset());
 
-        //Vision when B button is held
-
         double right, left;
+
+
         if(oi.xboxcontroller.getBButton()) {
             double heading_error = -limelight.getxOffset();
             double distance_error = -limelight.getyOffset() / 1.5;
@@ -50,7 +48,7 @@ public class drive extends Command {
             right = (steering_adjust - distance_adjust) / 1.5;
 
         } else { //curvature driving
-            if (Math.abs(throttle) < kJoystickDeadband) { //quickturning if throttle stick is not moved past 5%
+            if (Math.abs(throttle) < kJoystickDeadband) {
                 left = wheel;
                 right = -wheel;
             } else { //curvature
@@ -68,7 +66,7 @@ public class drive extends Command {
         //DRIVETRAIN CHARACTERIZATION NUMBER PROCESSING
         if (Math.abs(throttle) > kJoystickDeadband || Math.abs(wheel) > kJoystickDeadband || oi.xboxcontroller.getBButton()) {
 
-            switch(RobotMap.solenoid1.get()){
+            switch(DrivetrainSubsystem.shifter.get()){
                 case kForward:
                     left = processDriveChar(left, kVmaxHigh, kLslopeHigh,kLinterceptHigh);
                     right = processDriveChar(right, kVmaxHigh, kRslopeHigh,kRinterceptHigh);

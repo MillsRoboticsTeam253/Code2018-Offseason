@@ -1,9 +1,9 @@
-package frc.team253.robot.subsystems;
+package frc.team253.robot.subsystems.misc;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team253.robot.commands.vision;
+import frc.team253.robot.subsystems.misc.commands.vision;
 
 
 public class Limelight extends Subsystem {

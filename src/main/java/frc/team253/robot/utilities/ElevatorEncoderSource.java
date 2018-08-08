@@ -1,8 +1,9 @@
-package frc.team253.robot.utils;
+package frc.team253.robot.utilities;
 
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
-import frc.team253.robot.subsystems.Drivetrain.DrivetrainSubsystem;
+
+import static frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem.leftMotorA;
 
 public class ElevatorEncoderSource implements PIDSource {
     @Override
@@ -17,6 +18,6 @@ public class ElevatorEncoderSource implements PIDSource {
 
     @Override
     public double pidGet() {
-        return DrivetrainSubsystem.leftFront.getSelectedSensorPosition(0);
+        return leftMotorA.getSelectedSensorPosition(0);
     }
 }

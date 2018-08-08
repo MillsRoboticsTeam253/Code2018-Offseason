@@ -1,4 +1,4 @@
-package frc.team253.robot.subsystems.Drivetrain;
+package frc.team253.robot.subsystems.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -6,14 +6,16 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team253.robot.RobotMap;
-import frc.team253.robot.subsystems.Drivetrain.commands.drive;
+import frc.team253.robot.subsystems.misc.Miscellaneous;
+import frc.team253.robot.subsystems.drivetrain.commands.curvatureDrive;
 
 import java.util.Arrays;
 
 import static frc.team253.robot.Robot.drivetrain;
+import static frc.team253.robot.subsystems.drivetrain.DrivetrainConstants.*;
 
 public class DrivetrainSubsystem extends Subsystem {
 
@@ -26,17 +28,19 @@ public class DrivetrainSubsystem extends Subsystem {
     }
 
     //Declaring important stuff
-    private static final AHRS gyro = RobotMap.gyro;
+    private static final AHRS gyro = Miscellaneous.navX;
 
     public static final TalonSRX
-            leftMotorA = new TalonSRX(DrivetrainConstants.driveTrainLeftBack),
-            leftMotorB = new TalonSRX(DrivetrainConstants.driveTrainLeftFront),
-            rightMotorA = new TalonSRX(DrivetrainConstants.driveTrainRightFront),
-            rightMotorB = new TalonSRX(DrivetrainConstants.driveTrainRightBack);
+            leftMotorA = new TalonSRX(driveTrainLeftBack),
+            leftMotorB = new TalonSRX(driveTrainLeftFront),
+            rightMotorA = new TalonSRX(driveTrainRightFront),
+            rightMotorB = new TalonSRX(driveTrainRightBack);
 
-    public static final TalonSRX[] motors = {leftMotorA, leftMotorB, rightMotorB, rightMotorA};
+    private static final TalonSRX[] motors = {leftMotorA, leftMotorB, rightMotorB, rightMotorA};
 
-    public void initDefaultCommand() { setDefaultCommand(new drive()); }
+    public static final DoubleSolenoid shifter = new DoubleSolenoid(shifterPCM, shifterA, shifterB);
+
+    public void initDefaultCommand() { setDefaultCommand(new curvatureDrive()); }
 
     private DrivetrainSubsystem() {
 
@@ -75,6 +79,20 @@ public class DrivetrainSubsystem extends Subsystem {
 
     }
 
+    public void shiftGear(){
+        switch(shifter.get()){
+            case kForward:
+                shifter.set(DoubleSolenoid.Value.kReverse);
+                break;
+            default:
+                shifter.set(DoubleSolenoid.Value.kForward);
+                break;
+        }
+    }
+
+    public void shiftGear(DoubleSolenoid.Value shiftTo){
+        shifter.set(shiftTo);
+    }
 
     public void drive(double leftspeed, double rightspeed) { //Sets drivetrain sides to speed parameters
 

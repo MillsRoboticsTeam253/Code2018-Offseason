@@ -1,11 +1,11 @@
-package frc.team253.robot.commands;
+package frc.team253.robot.subsystems.elevator.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team253.robot.subsystems.Drivetrain.DrivetrainSubsystem;
 
 import static frc.team253.robot.Robot.elevator;
 import static frc.team253.robot.Robot.oi;
+import static frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem.leftMotorA;
 
 public class elevate extends Command {
 
@@ -24,7 +24,7 @@ public class elevate extends Command {
             elevator.elevatorControl.disable();
             elevator.elevate(elevateAxis);
         }else{
-            elevator.elevatorControl.setSetpoint(DrivetrainSubsystem.leftFront.getSelectedSensorPosition(0));
+            elevator.elevatorControl.setSetpoint(leftMotorA.getSelectedSensorPosition(0));
             elevator.elevatorControl.enable();
         }/*
         elevator.elevatorControl.disable();

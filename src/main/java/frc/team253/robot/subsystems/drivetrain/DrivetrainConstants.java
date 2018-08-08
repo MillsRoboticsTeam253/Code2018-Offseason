@@ -1,10 +1,14 @@
-package frc.team253.robot.subsystems.Drivetrain;
+package frc.team253.robot.subsystems.drivetrain;
 
 public class DrivetrainConstants {
     public static final int driveTrainRightBack = 1;
     public static final int driveTrainRightFront = 2;
     public static final int driveTrainLeftFront = 3;
     public static final int driveTrainLeftBack = 4;
+
+    public static final int shifterPCM = 1;
+    public static final int shifterA = 4;
+    public static final int shifterB = 5;
 
     public static final double kVmaxHigh = 2686;
     public static final double kLslopeHigh = 257;
