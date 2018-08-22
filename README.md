@@ -9,9 +9,10 @@ Once you have the code on your machine (follow the instructions below this secti
 
 ### Dependencies
 - [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- [Gradle](https://gradle.org/install/)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [IntelliJ](https://www.jetbrains.com/idea/)
+- [FRC Update Suite](http://www.ni.com/download/first-robotics-software-2017/7183/en/) (If it asks for a password to unzip, `pLaY&4%R3aL!` should work. You do not need to activate anything to make this work so ignore that.
+
 
 Install all dependencies before following any further instructions.
 
