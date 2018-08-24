@@ -50,8 +50,9 @@ public class DrivetrainSubsystem extends Subsystem {
 
         //Sets common settings for all motors
         Arrays.stream(motors).forEach(motor -> {
-            motor.configPeakCurrentLimit(0, 10);
-            motor.configContinuousCurrentLimit(45, 10);
+            motor.configPeakCurrentLimit(45, 10);
+            motor.configPeakCurrentDuration(500, 10);
+            motor.configContinuousCurrentLimit(35, 10);
             motor.configVoltageCompSaturation(12, 10);
             motor.enableVoltageCompensation(true);
         });
