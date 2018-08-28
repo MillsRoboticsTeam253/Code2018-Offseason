@@ -5,10 +5,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.team253.bobabots.utilities.RunCommand;
 import frc.team253.bobabots.oi.XBPovButton;
+import frc.team253.robot.subsystems.elevator.ElevatorSubsystem;
 
 import static edu.wpi.first.wpilibj.GenericHID.Hand;
 import static frc.team253.bobabots.oi.XBPovConstants.*;
 import static frc.team253.robot.Robot.drivetrain;
+import static frc.team253.robot.Robot.elevator;
+import static frc.team253.robot.Robot.oi;
+import static frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem.leftMotorA;
 
 public class OI {
 
@@ -31,7 +35,7 @@ public class OI {
     public JoystickButton dpadDOWN_LEFT;
     public JoystickButton dpadLEFT;
     public JoystickButton dpadUP_LEFT;
-
+    public JoystickButton dpadNONE;
 
 
     public OI() {
@@ -54,12 +58,15 @@ public class OI {
         dpadDOWN_LEFT = new XBPovButton(xboxcontroller,DOWN_LEFT);
         dpadLEFT = new XBPovButton(xboxcontroller,LEFT);
         dpadUP_LEFT = new XBPovButton(xboxcontroller,UP_LEFT);
+        dpadNONE = new XBPovButton(xboxcontroller,NONE);
 
-
-        dpadUP.whenPressed(new RunCommand( () -> drivetrain.resetEncoders() ));
-
+        //gear shifty bois
         dpadLEFT.whenPressed(new RunCommand( () -> drivetrain.shiftGear() ));
-
+        //Elevator setpoint handling
+        dpadUP.whenPressed(new RunCommand( () -> elevator.setElevator(ElevatorSubsystem.ElevatorHeight.SCALE) ));
+        dpadRIGHT.whenPressed(new RunCommand( () -> elevator.setElevator(ElevatorSubsystem.ElevatorHeight.SWITCH) ));
+        dpadDOWN.whenPressed(new RunCommand( () -> elevator.setElevator(ElevatorSubsystem.ElevatorHeight.GROUND) ));
+        dpadNONE.whenPressed(new RunCommand( () -> elevator.setElevator(leftMotorA.getSelectedSensorPosition(0))));
     }
 
     public double throttleValue() {

@@ -11,6 +11,7 @@ import frc.team253.robot.utilities.ElevatorEncoderSource;
 import frc.team253.robot.subsystems.misc.Miscellaneous;
 import frc.team253.robot.subsystems.elevator.commands.elevate;
 
+import static frc.team253.robot.Robot.elevator;
 import static frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem.leftMotorB;
 
 public class ElevatorSubsystem extends Subsystem {
@@ -42,6 +43,30 @@ public class ElevatorSubsystem extends Subsystem {
 
     public void resetEncoder(){
         leftMotorB.setSelectedSensorPosition(0,0,10);
+    }
+
+    public enum ElevatorHeight {
+        SCALE (0),
+        SWITCH (0),
+        GROUND (0),
+        INTAKE_HEIGHT(0);
+
+        private int encoderTarget;
+        ElevatorHeight(int encoderTarget){
+            this.encoderTarget =  encoderTarget;
+        }
+
+        private int getValue() {
+            return encoderTarget;
+        }
+
+    }
+
+    public void setElevator(ElevatorHeight target){
+        elevatorControl.setSetpoint((double)target.getValue());
+    }
+    public void setElevator(double target){
+        elevatorControl.setSetpoint(target);
     }
 
     @Override
