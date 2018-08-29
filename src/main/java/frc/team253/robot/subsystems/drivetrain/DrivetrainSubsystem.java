@@ -27,16 +27,20 @@ public class DrivetrainSubsystem extends Subsystem {
         return instance;
     }
 
-    //Declaring important stuff
+    //Initializes gyro on MXP port
     private static final AHRS gyro = Miscellaneous.navX;
 
+    //Initializes Talons with values in constants file
     public static final TalonSRX
             leftMotorA = new TalonSRX(driveTrainLeftBack),
             leftMotorB = new TalonSRX(driveTrainLeftFront),
             rightMotorA = new TalonSRX(driveTrainRightFront),
             rightMotorB = new TalonSRX(driveTrainRightBack);
 
+    //Creates arrays for various motors so I can call the same methods for each at the same time
     private static final TalonSRX[] motors = {leftMotorA, leftMotorB, rightMotorB, rightMotorA};
+    private static final TalonSRX[] leftMotors = {leftMotorA, leftMotorB};
+    private static final TalonSRX[] rightMotors = {rightMotorA, rightMotorB};
 
     public static final DoubleSolenoid shifter = new DoubleSolenoid(shifterPCM, shifterA, shifterB);
 
@@ -57,11 +61,9 @@ public class DrivetrainSubsystem extends Subsystem {
             motor.enableVoltageCompensation(true);
         });
 
-        //Negates the right side of the drivetrain
-        leftMotorA.setInverted(false);
-        leftMotorB.setInverted(false);
-        rightMotorA.setInverted(true);
-        rightMotorB.setInverted(true);
+        //Drivetrain negation settings
+        Arrays.stream(leftMotors).forEach(motor -> motor.setInverted(false));
+        Arrays.stream(rightMotors).forEach(motor -> motor.setInverted(true));
 
         //Settings for Grayhill 63R256 encoder on left drivetrain side
         leftMotorA.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, 1, 10);
@@ -79,6 +81,7 @@ public class DrivetrainSubsystem extends Subsystem {
         leftMotorB.setSensorPhase(false);
 
     }
+
 
     public void shiftGear(){
         switch(shifter.get()){

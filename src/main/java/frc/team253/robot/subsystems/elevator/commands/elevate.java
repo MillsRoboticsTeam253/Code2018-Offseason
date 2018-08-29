@@ -26,16 +26,17 @@ public class elevate extends Command {
 
         if(Math.abs(elevateAxis) >= 0.1){
 
-            if(elevator.elevatorControl.isEnabled()){ //if PIDController *is* enabled, disable it
+            /*if(elevator.elevatorControl.isEnabled()){ //if PIDController *is* enabled, disable it
                 elevator.elevatorControl.disable();
-            }
+            }*/
             elevator.elevate(elevateAxis);
 
         } else {
 
-            if(!elevator.elevatorControl.isEnabled()){ //if PIDController is *not* enabled, enable it
+            /*if(!elevator.elevatorControl.isEnabled()){ //if PIDController is *not* enabled, enable it
                 elevator.elevatorControl.enable();
-            }
+            }*/
+            elevator.elevate(0);
 
         }
 

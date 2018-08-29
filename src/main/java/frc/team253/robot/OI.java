@@ -11,7 +11,6 @@ import static edu.wpi.first.wpilibj.GenericHID.Hand;
 import static frc.team253.bobabots.oi.XBPovConstants.*;
 import static frc.team253.robot.Robot.drivetrain;
 import static frc.team253.robot.Robot.elevator;
-import static frc.team253.robot.Robot.oi;
 import static frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem.leftMotorA;
 
 public class OI {

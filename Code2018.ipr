@@ -78,10 +78,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Code2018.iml" filepath="$PROJECT_DIR$/Code2018.iml" />
       <module fileurl="file://$PROJECT_DIR$/Code2018-Offseason.iml" filepath="$PROJECT_DIR$/Code2018-Offseason.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Code2018-Offseason.iml" filepath="$PROJECT_DIR$/Code2018-Offseason.iml" />
       <module fileurl="file://$PROJECT_DIR$/Code2018-Offseason_main.iml" filepath="$PROJECT_DIR$/Code2018-Offseason_main.iml" group="Code2018-Offseason" />
-      <module fileurl="file://$PROJECT_DIR$/Code2018-Offseason_main.iml" filepath="$PROJECT_DIR$/Code2018-Offseason_main.iml" group="Code2018-Offseason" />
-      <module fileurl="file://$PROJECT_DIR$/Code2018-Offseason_test.iml" filepath="$PROJECT_DIR$/Code2018-Offseason_test.iml" group="Code2018-Offseason" />
       <module fileurl="file://$PROJECT_DIR$/Code2018-Offseason_test.iml" filepath="$PROJECT_DIR$/Code2018-Offseason_test.iml" group="Code2018-Offseason" />
       <module fileurl="file://$PROJECT_DIR$/Code2018_main.iml" filepath="$PROJECT_DIR$/Code2018_main.iml" group="Code2018" />
       <module fileurl="file://$PROJECT_DIR$/Code2018_test.iml" filepath="$PROJECT_DIR$/Code2018_test.iml" group="Code2018" />
