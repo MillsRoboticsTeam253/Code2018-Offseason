@@ -41,7 +41,7 @@ public class ElevatorSubsystem extends Subsystem {
         ElevatorSparks.set(speed);
     }
 
-    public void resetEncoder(){
+    public void resetEncoders(){
         leftMotorB.setSelectedSensorPosition(0,0,10);
     }
 

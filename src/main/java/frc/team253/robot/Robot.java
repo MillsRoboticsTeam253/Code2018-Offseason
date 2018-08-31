@@ -4,6 +4,7 @@ package frc.team253.robot;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.team253.robot.subsystems.intake.IntakeSubsystem;
 import frc.team253.robot.utilities.pathFollow;
 import frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem;
 import frc.team253.robot.subsystems.elevator.ElevatorSubsystem;
@@ -18,6 +19,7 @@ public class Robot extends TimedRobot {
     public static DrivetrainSubsystem drivetrain;
     public static Limelight limelight;
     public static ElevatorSubsystem elevator;
+    public static IntakeSubsystem intakeSubsystem;
 
     @Override
     public void robotInit() {
@@ -25,6 +27,7 @@ public class Robot extends TimedRobot {
         drivetrain = DrivetrainSubsystem.getInstance();
         elevator = ElevatorSubsystem.getInstance();
         limelight = Limelight.getInstance();
+        intakeSubsystem =  IntakeSubsystem.getInstance();
         oi = new OI();
 
         drivetrain.resetEncoders();
