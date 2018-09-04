@@ -55,6 +55,6 @@ public class IntakeSubsystem extends Subsystem {
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new intake(0));
-    }
+    } //change this to the joystick axis
 
 }
