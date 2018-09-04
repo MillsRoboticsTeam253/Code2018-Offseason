@@ -47,3 +47,19 @@ To deploy your code, you will need access to the robot. Connect to the robot's r
 If you get a `BUILD FAILED in # seconds` error, most likely your computer has not yet connected to the robot. Wait a few seconds and try again. 
 
 Once your code deploys to the robot, you are ready to test it. You will *need* a Windows machine or the team DriverStation, with the FRC Update Suite installed, to test.
+
+## Code Structure
+#### The code is structured as follows:
+- Sources root is src
+    - Skips through empty folders until team253
+    - Splits into:
+    	- bobabots  - Reusable code that will be carried on to next year's robot
+		- contains folders to organize code
+	- robot - code that is specifically for this year's robot
+		- subsystems - contains individual packages for each subsystem
+			- inside each package is a constants class, a subsystem class, and a folder containing all associated commands
+		- utilities - various utilities
+		- Robot - the main robot class
+		- OI - class to put code that deals with the operator interface
+- Convention
+	- All classes are in UpperCamelCase, except commands, because we're not one for following convention at 253.
