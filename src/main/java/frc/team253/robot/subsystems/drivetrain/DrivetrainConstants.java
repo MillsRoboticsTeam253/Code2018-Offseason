@@ -25,5 +25,6 @@ public class DrivetrainConstants {
     public static final double kWheelbase = 0.59817;
     public static final double kWheelDiameter = 0.1524;
 
-    public static final double kJoystickDeadband = 0.1;
+    public static final double kJoystickDeadband = 0.05;
+
 }

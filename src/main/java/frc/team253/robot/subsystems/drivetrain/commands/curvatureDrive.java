@@ -24,6 +24,9 @@ public class curvatureDrive extends Command {
         double throttle = oi.throttleValue(),
                 wheel = oi.turnValue();
 
+        throttle = deadbandX(throttle, kJoystickDeadband);
+        wheel = deadbandX(wheel, kJoystickDeadband);
+
         SmartDashboard.putNumber("xOffset", limelight.getxOffset());
         SmartDashboard.putNumber("yOffset", limelight.getyOffset());
 
@@ -56,30 +59,49 @@ public class curvatureDrive extends Command {
                 right =throttle-throttle*wheel;
             }
 
-            //Squaring drive values to add sensitivity curve
-            //left = Math.copySign(Math.pow(left,2),left);
-            //right = Math.copySign(Math.pow(right,2),right);
+            left = exponentiate(left, 2);
+            right = exponentiate(right, 2);
+
         }
 
         setBrakeMode();
 
-        //DRIVETRAIN CHARACTERIZATION NUMBER PROCESSING
-        if (Math.abs(throttle) > kJoystickDeadband || Math.abs(wheel) > kJoystickDeadband || oi.xboxcontroller.getBButton()) {
+        switch(DrivetrainSubsystem.shifter.get()){
+            case kForward:
+                left = deadbandY(left, kLinterceptHigh/12.0);
+                right = deadbandY(right, kRinterceptHigh/12.0);
+                break;
+            case kReverse:
+                left = deadbandY(left, kLinterceptLow/12.0);
+                right = deadbandY(right, kRinterceptLow/12.0);
+            case kOff:
+                break;
+        }
 
-//            switch(DrivetrainSubsystem.shifter.get()){
-//                case kForward:
-//                    left = processDriveChar(left, kVmaxHigh, kLslopeHigh,kLinterceptHigh);
-//                    right = processDriveChar(right, kVmaxHigh, kRslopeHigh,kRinterceptHigh);
-//                    break;
-//                case kReverse:
-//                    left = processDriveChar(left, kVmaxLow, kLslopeLow,kLinterceptLow);
-//                    right = processDriveChar(right, kVmaxLow, kRslopeLow,kRinterceptLow);
-//                case kOff:
-//                    break;
-            //}
-            drivetrain.drive(left, right);
+        drivetrain.drive(left, right);
+    }
+
+    public static double deadbandX(double input, double deadband){
+        if(Math.abs(input) <= deadband){
+            return 0;
+        } else if(Math.abs(input)==1) {
+            return input;
         } else {
-            drivetrain.drive(0, 0);
+            return (1/(1-deadband)*(input+Math.signum(-input)*deadband));
+        }
+    }
+
+    public static double exponentiate(double input, double power){
+        return Math.copySign(Math.pow(input, power),input);
+    }
+
+    public static double deadbandY(double input, double deadband){
+        if(Math.abs(input)==0.0){
+            return 0;
+        } else if(Math.abs(input) ==1){
+            return input;
+        } else {
+            return input*(1.0-deadband)+Math.signum(input)*deadband;
         }
     }
 
