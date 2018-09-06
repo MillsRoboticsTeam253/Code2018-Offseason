@@ -36,7 +36,7 @@ public class elevate extends Command {
             /*if(!elevator.elevatorControl.isEnabled()){ //if PIDController is *not* enabled, enable it
                 elevator.elevatorControl.enable();
             }*/
-            elevator.elevate(0);
+            elevator.elevate(-0.2);
 
         }
 
