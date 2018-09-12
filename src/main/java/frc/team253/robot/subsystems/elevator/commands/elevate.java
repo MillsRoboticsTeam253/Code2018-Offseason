@@ -30,6 +30,7 @@ public class elevate extends Command {
                 elevator.elevatorControl.disable();
             }*/
             elevator.elevate(elevateAxis);
+            //TODO: Tune PID loop
 
         } else {
 
