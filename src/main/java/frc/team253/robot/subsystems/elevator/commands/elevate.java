@@ -38,6 +38,7 @@ public class elevate extends Command {
             }*/
             elevator.elevate(-0.2);
             //Stall Percentage Old Intake w/o Cube: -0.2
+            //REEE
             //TODO: Need to reverse elevator motors b/c sparks reading red when going up
 
         }
