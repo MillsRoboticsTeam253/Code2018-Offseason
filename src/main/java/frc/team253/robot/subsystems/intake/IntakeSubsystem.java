@@ -45,6 +45,10 @@ public class IntakeSubsystem extends Subsystem {
         intakeSolenoid.set(intakeStatus);
     }
 
+
+
+
+
     public static IntakeSubsystem getInstance() {
         if (instance == null)
             instance = new IntakeSubsystem();
