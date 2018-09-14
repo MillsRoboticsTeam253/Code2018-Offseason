@@ -19,12 +19,14 @@ public class IntakeSubsystem extends Subsystem {
     private static SpeedController[] intakeMotors = {intakeMotorA};
 
     private IntakeSubsystem() {
-
     }
-
-    public static void clampIntake(){
-
-        switch(intakeSolenoid.get()){
+    
+    //Controls intake position
+    public static void clampIntake(){ 
+        /* The switch statement checks the current position of the intake 
+         * mechanism and changes it to the opposite position 
+         * i.e. If the intake is clamped it will unclamp and vice versa */
+        switch(intakeSolenoid.get()){ 
             case kForward:
                 intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
                 break;
@@ -32,22 +34,19 @@ public class IntakeSubsystem extends Subsystem {
                 intakeSolenoid.set(DoubleSolenoid.Value.kForward);
                 break;
         }
-
     }
-
+    /* Overrides the clampIntake method with a way to switch the 
+     * intake position manually */
+    public static void clampIntake(DoubleSolenoid.Value intakeStatus){
+        intakeSolenoid.set(intakeStatus);
+    }
+    
+    //Spins the wheels on the intake at a given speed 
     public static void runIntake(double speed) {
         for (SpeedController motors : intakeMotors){
             motors.set(speed);
         }
     }
-
-    public static void clampIntake(DoubleSolenoid.Value intakeStatus){
-        intakeSolenoid.set(intakeStatus);
-    }
-
-
-
-
 
     public static IntakeSubsystem getInstance() {
         if (instance == null)
