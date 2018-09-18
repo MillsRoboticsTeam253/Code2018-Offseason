@@ -16,6 +16,7 @@ import java.util.Arrays;
 
 import static frc.team253.robot.Robot.drivetrain;
 import static frc.team253.robot.subsystems.drivetrain.DrivetrainConstants.*;
+import static frc.team253.robot.subsystems.misc.Miscellaneous.navX;
 
 public class DrivetrainSubsystem extends Subsystem {
 
@@ -80,6 +81,19 @@ public class DrivetrainSubsystem extends Subsystem {
         leftMotorB.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
         leftMotorB.setSensorPhase(false);
 
+        for(TalonSRX motor : motors){
+
+            motor.selectProfileSlot(0, 0);
+
+            motor.config_kF(0, 0.22647775072, 10);
+            motor.config_kP(0, 0, 10);
+            motor.config_kI(0, 0, 10);
+            motor.config_kD(0, 0, 10);
+
+            motor.configMotionCruiseVelocity(1000, 10);
+            motor.configMotionAcceleration(1000,10);
+        }
+
     }
 
 
@@ -112,6 +126,19 @@ public class DrivetrainSubsystem extends Subsystem {
         SmartDashboard.putNumber("right encoder", rightMotorA.getSelectedSensorPosition(0));
 
     }
+
+    public boolean driveDistance(double target){
+        leftMotorA.set(ControlMode.MotionMagic, target);
+        rightMotorA.set(ControlMode.MotionMagic, target);
+
+        if(Math.abs(target - leftMotorA.getSelectedSensorPosition(0)) < 300) {
+            return true;
+        }else{
+            System.out.println(target - leftMotorA.getSelectedSensorPosition(0));
+            return false;
+        }
+    }
+
 
     public void resetEncoders(){
         drivetrain.leftMotorA.setSelectedSensorPosition(0,0,10);

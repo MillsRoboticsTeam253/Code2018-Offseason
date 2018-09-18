@@ -3,9 +3,12 @@ package frc.team253.robot;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.team253.robot.subsystems.drivetrain.commands.goToDistance;
+import frc.team253.robot.subsystems.drivetrain.commands.rotationActivity;
 import frc.team253.robot.subsystems.intake.IntakeSubsystem;
-import frc.team253.robot.utilities.pathFollow;
+import frc.team253.robot.subsystems.drivetrain.commands.turnToAngle;
 import frc.team253.robot.subsystems.drivetrain.DrivetrainSubsystem;
 import frc.team253.robot.subsystems.elevator.ElevatorSubsystem;
 import frc.team253.robot.subsystems.misc.Limelight;
@@ -21,6 +24,8 @@ public class Robot extends TimedRobot {
     public static ElevatorSubsystem elevator;
     public static IntakeSubsystem intakeSubsystem;
 
+    Command rotation;
+
     @Override
     public void robotInit() {
         Miscellaneous.init();
@@ -31,17 +36,21 @@ public class Robot extends TimedRobot {
         oi = new OI();
 
         drivetrain.resetEncoders();
+
     }
 
     @Override
     public void disabledInit() {
         //SET BRAKE
+
     }
 
     @Override
     public void autonomousInit() {
-        //SET COAST
-        new pathFollow("CtoRSwitch").start();
+        rotation = new rotationActivity();
+
+        new goToDistance(2).start();
+
     }
 
     @Override
@@ -63,7 +72,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
+
         Scheduler.getInstance().run();
+
     }
 
     @Override
