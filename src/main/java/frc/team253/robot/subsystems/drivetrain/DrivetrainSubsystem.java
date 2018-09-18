@@ -127,16 +127,11 @@ public class DrivetrainSubsystem extends Subsystem {
 
     }
 
-    public boolean driveDistance(double target){
+    public void driveDistance(double target){
+        
         leftMotorA.set(ControlMode.MotionMagic, target);
         rightMotorA.set(ControlMode.MotionMagic, target);
 
-        if(Math.abs(target - leftMotorA.getSelectedSensorPosition(0)) < 300) {
-            return true;
-        }else{
-            System.out.println(target - leftMotorA.getSelectedSensorPosition(0));
-            return false;
-        }
     }
 
 

@@ -8,7 +8,7 @@ import static frc.team253.robot.subsystems.misc.Miscellaneous.navX;
 public class turnToAngle extends Command {
 
     double angle;
-    boolean status;
+    boolean isComplete;
 
     public turnToAngle(double angle) {
         this.angle = angle;
@@ -25,9 +25,9 @@ public class turnToAngle extends Command {
         drivetrain.drive(turn, -turn);
 
         if(Math.abs(targetHeading-currentHeading)<10){
-            status = true;
+            isComplete = true;
         } else {
-            status = false;
+            isComplete = false;
         }
 
     }
@@ -35,7 +35,7 @@ public class turnToAngle extends Command {
     @Override
     protected boolean isFinished() {
 
-        return status;
+        return isComplete;
 
     }
 }
