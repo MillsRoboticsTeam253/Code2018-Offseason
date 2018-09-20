@@ -47,9 +47,10 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        rotation = new rotationActivity();
+        drivetrain.resetEncoders();
+        new rotationActivity().start();
 
-        new goToDistance(2).start();
+        //new goToDistance(2).start();
 
     }
 

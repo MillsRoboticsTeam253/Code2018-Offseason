@@ -85,12 +85,12 @@ public class DrivetrainSubsystem extends Subsystem {
 
             motor.selectProfileSlot(0, 0);
 
-            motor.config_kF(0, 0.22647775072, 10);
-            motor.config_kP(0, 0, 10);
+            motor.config_kF(0, 0.3808637379, 10);
+            motor.config_kP(0, 0.1, 10);
             motor.config_kI(0, 0, 10);
             motor.config_kD(0, 0, 10);
 
-            motor.configMotionCruiseVelocity(1000, 10);
+            motor.configMotionCruiseVelocity(500, 10);
             motor.configMotionAcceleration(1000,10);
         }
 

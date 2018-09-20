@@ -20,4 +20,8 @@ public class Miscellaneous {
         compressorA = new Compressor(compressorNumber);
 
     }
+
+    public double getAngle(){
+        return navX.getAngle();
+    }
 }
