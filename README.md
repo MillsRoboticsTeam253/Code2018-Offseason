@@ -63,3 +63,6 @@ Once your code deploys to the robot, you are ready to test it. You will *need* a
 		- OI - class to put code that deals with the operator interface
 - Convention
 	- All classes are in UpperCamelCase, except commands, because we're not one for following convention at 253.
+
+
+***If you are using the VS Code Branch, please talk to the leads***
