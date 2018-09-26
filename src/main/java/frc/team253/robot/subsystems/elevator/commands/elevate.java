@@ -37,7 +37,7 @@ public class elevate extends Command {
             /*if(!elevator.elevatorControl.isEnabled()){ //if PIDController is *not* enabled, enable it
                 elevator.elevatorControl.enable();
             }*/
-            elevator.elevate(-0.2);
+            elevator.elevate(0.0);
             //Stall Percentage Old Intake w/o Cube: -0.2
             //REEE
             //TODO: Need to reverse elevator motors b/c sparks reading red when going up

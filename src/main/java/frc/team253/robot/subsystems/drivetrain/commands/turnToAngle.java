@@ -7,20 +7,22 @@ import static frc.team253.robot.subsystems.misc.Miscellaneous.navX;
 
 public class turnToAngle extends Command {
 
-    double angle;
-    boolean isComplete;
+    private double angle;
+    private boolean isComplete;
 
-    double currentHeading;
-    double targetHeading;
+    private double currentHeading;
+    private double targetHeading;
 
     public turnToAngle(double angle) {
         this.angle = angle;
         requires(drivetrain);
 
-        navX.reset();
-        currentHeading = 0;
         targetHeading = currentHeading + angle;
 
+    }
+
+    protected void initialize() {
+        navX.reset();
     }
 
     protected void execute(){

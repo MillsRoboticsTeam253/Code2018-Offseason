@@ -17,6 +17,12 @@ public class goToDistance extends Command {
 
     }
 
+    protected void initialize(){
+        drivetrain.resetEncoders();
+        drivetrain.resetGyro();
+
+    }
+
     @Override
     protected void execute() {
 

@@ -9,18 +9,5 @@ public class rotationActivity extends CommandGroup {
         addSequential(new turnToAngle(-90), 10);
         addSequential(new goToDistance(20), 10);
         addSequential(new turnToAngle(90), 10);
-        addSequential(new goToDistance(3.33), 10);
-        addSequential(new turnToAngle(90), 10);
-        addSequential(new goToDistance(6.66), 10);
-        addSequential(new turnToAngle(-90), 10);
-        addSequential(new goToDistance(7.5), 10);
-        addSequential(new turnToAngle(-90), 10);
-        addSequential(new goToDistance(3.33), 10);
-        addSequential(new turnToAngle(-90), 10);
-        addSequential(new goToDistance(3.33), 10);
-        addSequential(new turnToAngle(90), 10);
-        addSequential(new goToDistance(3.33), 10);
-        addSequential(new turnToAngle(90), 10);
-        addSequential(new goToDistance(3.33), 10);
     }
 }
